@@ -1,0 +1,30 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="375" height="812" viewBox="0 0 375 812">
+  <rect width="375" height="812" fill="#f3f4f6" rx="20"/>
+  <rect x="0" y="0" width="375" height="56" fill="#1a56db" rx="0"/>
+  <text x="20" y="36" font-family="Arial" font-size="16" font-weight="bold" fill="white">📋 Portail et Inspections</text>
+  <rect x="20" y="76" width="335" height="200" fill="url(#grad1)" rx="12"/>
+  <linearGradient id="grad1" x1="0" y1="0" x2="0" y2="1">
+    <stop offset="0%" stop-color="#1a56db"/>
+    <stop offset="100%" stop-color="#2563eb"/>
+  </linearGradient>
+  <text x="187" y="120" font-family="Arial" font-size="22" font-weight="bold" fill="white" text-anchor="middle">Portail &amp; Inspections</text>
+  <text x="187" y="148" font-family="Arial" font-size="13" fill="rgba(255,255,255,0.9)" text-anchor="middle">Gérez vos demandes de devis</text>
+  <rect x="50" y="175" width="275" height="38" fill="rgba(255,255,255,0.2)" rx="8"/>
+  <text x="187" y="200" font-family="Arial" font-size="14" fill="white" text-anchor="middle">Nouvelle demande de devis</text>
+  <rect x="50" y="220" width="275" height="38" fill="rgba(255,255,255,0.2)" rx="8"/>
+  <text x="187" y="245" font-family="Arial" font-size="14" fill="white" text-anchor="middle">Voir mes devis</text>
+  <rect x="20" y="296" width="160" height="120" fill="white" rx="8"/>
+  <text x="100" y="335" font-family="Arial" font-size="24" text-anchor="middle">📝</text>
+  <text x="100" y="360" font-family="Arial" font-size="14" font-weight="bold" fill="#1f2937" text-anchor="middle">Formulaire</text>
+  <rect x="195" y="296" width="160" height="120" fill="white" rx="8"/>
+  <text x="275" y="335" font-family="Arial" font-size="24" text-anchor="middle">📄</text>
+  <text x="275" y="360" font-family="Arial" font-size="14" font-weight="bold" fill="#1f2937" text-anchor="middle">PDF</text>
+  <rect x="20" y="430" width="160" height="120" fill="white" rx="8"/>
+  <text x="100" y="469" font-family="Arial" font-size="24" text-anchor="middle">📱</text>
+  <text x="100" y="494" font-family="Arial" font-size="14" font-weight="bold" fill="#1f2937" text-anchor="middle">Mobile First</text>
+  <rect x="195" y="430" width="160" height="120" fill="white" rx="8"/>
+  <text x="275" y="469" font-family="Arial" font-size="24" text-anchor="middle">🔒</text>
+  <text x="275" y="494" font-family="Arial" font-size="14" font-weight="bold" fill="#1f2937" text-anchor="middle">Sécurisé</text>
+  <rect x="0" y="760" width="375" height="52" fill="#1f2937"/>
+  <text x="187" y="790" font-family="Arial" font-size="11" fill="#9ca3af" text-anchor="middle">© 2026 RIF. Challenge Flash</text>
+</svg>

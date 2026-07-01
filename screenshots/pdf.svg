@@ -1,0 +1,47 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="595" height="842" viewBox="0 0 595 842">
+  <rect width="595" height="842" fill="white"/>
+  <rect x="0" y="0" width="595" height="120" fill="#1a56db"/>
+  <text x="50" y="55" font-family="Arial" font-size="32" font-weight="bold" fill="white">DEVIS</text>
+  <text x="50" y="95" font-family="Arial" font-size="14" fill="white">Portail &amp; Inspections</text>
+  <text x="400" y="55" font-family="Arial" font-size="12" fill="rgba(255,255,255,0.8)">N° Devis: DEV-0001</text>
+  <text x="400" y="75" font-family="Arial" font-size="12" fill="rgba(255,255,255,0.8)">Date: 30/06/2026</text>
+  <text x="400" y="95" font-family="Arial" font-size="12" fill="rgba(255,255,255,0.8)">Statut: draft</text>
+  <rect x="50" y="145" width="245" height="85" fill="#f3f4f6"/>
+  <text x="65" y="165" font-family="Arial" font-size="12" font-weight="bold" fill="#1f2937">CLIENT</text>
+  <text x="65" y="188" font-family="Arial" font-size="11" fill="#1f2937">Tech Industries SAS</text>
+  <text x="65" y="206" font-family="Arial" font-size="11" fill="#1f2937">Contact: Jean Dupont</text>
+  <text x="65" y="224" font-family="Arial" font-size="11" fill="#1f2937">Email: jean@techindustries.fr</text>
+  <rect x="345" y="145" width="205" height="40" fill="#f3f4f6"/>
+  <text x="360" y="165" font-family="Arial" font-size="12" font-weight="bold" fill="#1f2937">DESCRIPTION</text>
+  <text x="360" y="188" font-family="Arial" font-size="11" fill="#1f2937">Inspection complète des installations</text>
+  <rect x="50" y="270" width="295" height="25" fill="#1a56db"/>
+  <rect x="345" y="270" width="70" height="25" fill="#1a56db"/>
+  <rect x="415" y="270" width="70" height="25" fill="#1a56db"/>
+  <rect x="485" y="270" width="65" height="25" fill="#1a56db"/>
+  <text x="60" y="287" font-family="Arial" font-size="11" font-weight="bold" fill="white">Description</text>
+  <text x="355" y="287" font-family="Arial" font-size="11" font-weight="bold" fill="white" text-anchor="middle">Quantité</text>
+  <text x="420" y="287" font-family="Arial" font-size="11" font-weight="bold" fill="white" text-anchor="middle">PU</text>
+  <text x="490" y="287" font-family="Arial" font-size="11" font-weight="bold" fill="white" text-anchor="end">Total</text>
+  <rect x="50" y="300" width="500" height="22" fill="#f9fafb"/>
+  <text x="60" y="316" font-family="Arial" font-size="10" fill="#1f2937">Visite technique des installations</text>
+  <text x="355" y="316" font-family="Arial" font-size="10" fill="#1f2937" text-anchor="middle">1</text>
+  <text x="420" y="316" font-family="Arial" font-size="10" fill="#1f2937" text-anchor="middle">1 200.00 €</text>
+  <text x="490" y="316" font-family="Arial" font-size="10" fill="#1f2937" text-anchor="end">1 200.00 €</text>
+  <rect x="50" y="322" width="500" height="22" fill="white"/>
+  <text x="60" y="338" font-family="Arial" font-size="10" fill="#1f2937">Rapport d'inspection détaillé</text>
+  <text x="355" y="338" font-family="Arial" font-size="10" fill="#1f2937" text-anchor="middle">1</text>
+  <text x="420" y="338" font-family="Arial" font-size="10" fill="#1f2937" text-anchor="middle">800.00 €</text>
+  <text x="490" y="338" font-family="Arial" font-size="10" fill="#1f2937" text-anchor="end">800.00 €</text>
+  <rect x="50" y="344" width="500" height="22" fill="#f9fafb"/>
+  <text x="60" y="360" font-family="Arial" font-size="10" fill="#1f2937">Tests de conformité électrique</text>
+  <text x="355" y="360" font-family="Arial" font-size="10" fill="#1f2937" text-anchor="middle">5</text>
+  <text x="420" y="360" font-family="Arial" font-size="10" fill="#1f2937" text-anchor="middle">100.00 €</text>
+  <text x="490" y="360" font-family="Arial" font-size="10" fill="#1f2937" text-anchor="end">500.00 €</text>
+  <rect x="385" y="430" width="165" height="30" fill="#1a56db"/>
+  <text x="400" y="450" font-family="Arial" font-size="16" font-weight="bold" fill="white">TOTAL:</text>
+  <text x="465" y="450" font-family="Arial" font-size="16" font-weight="bold" fill="white" text-anchor="end">2 500.00 €</text>
+  <line x1="50" y1="750" x2="545" y2="750" stroke="#e5e7eb" stroke-width="1"/>
+  <text x="295" y="770" font-family="Arial" font-size="10" fill="#9ca3af" text-anchor="middle">Portail &amp; Inspections - RIF</text>
+  <text x="295" y="786" font-family="Arial" font-size="10" fill="#9ca3af" text-anchor="middle">MEI - 2 B Rue Alfred Nobel, 77420 Champs-sur-Marne</text>
+  <text x="295" y="802" font-family="Arial" font-size="10" fill="#9ca3af" text-anchor="middle">Email: contact@grouperif.com - Site: www.grouperif.com</text>
+</svg>

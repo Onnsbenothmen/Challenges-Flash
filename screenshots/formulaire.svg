@@ -1,0 +1,37 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="375" height="812" viewBox="0 0 375 812">
+  <rect width="375" height="812" fill="#f3f4f6" rx="20"/>
+  <rect x="0" y="0" width="375" height="56" fill="#1a56db" rx="0"/>
+  <text x="20" y="36" font-family="Arial" font-size="15" font-weight="bold" fill="white">📋 Nouveau devis</text>
+  <rect x="16" y="72" width="343" height="380" fill="white" rx="12"/>
+  <rect x="16" y="72" width="343" height="40" fill="none" rx="12"/>
+  <text x="32" y="100" font-family="Arial" font-size="15" font-weight="bold" fill="#1f2937">Informations client</text>
+  <line x1="16" y1="112" x2="359" y2="112" stroke="#e8effd" stroke-width="2"/>
+  <text x="32" y="140" font-family="Arial" font-size="12" font-weight="bold" fill="#374151">Entreprise *</text>
+  <rect x="32" y="148" width="310" height="38" fill="#f9fafb" rx="8" stroke="#d1d5db" stroke-width="1"/>
+  <text x="42" y="173" font-family="Arial" font-size="14" fill="#6b7280">Tech Industries SAS</text>
+  <text x="32" y="208" font-family="Arial" font-size="12" font-weight="bold" fill="#374151">Contact *</text>
+  <rect x="32" y="216" width="310" height="38" fill="#f9fafb" rx="8" stroke="#d1d5db" stroke-width="1"/>
+  <text x="42" y="241" font-family="Arial" font-size="14" fill="#6b7280">Jean Dupont</text>
+  <text x="32" y="276" font-family="Arial" font-size="12" font-weight="bold" fill="#374151">Email *</text>
+  <rect x="32" y="284" width="310" height="38" fill="#f9fafb" rx="8" stroke="#d1d5db" stroke-width="1"/>
+  <text x="42" y="309" font-family="Arial" font-size="14" fill="#6b7280">jean@techindustries.fr</text>
+  <rect x="16" y="468" width="343" height="280" fill="white" rx="12"/>
+  <text x="32" y="496" font-family="Arial" font-size="15" font-weight="bold" fill="#1f2937">Détails du devis</text>
+  <line x1="16" y1="508" x2="359" y2="508" stroke="#e8effd" stroke-width="2"/>
+  <text x="32" y="536" font-family="Arial" font-size="12" font-weight="bold" fill="#374151">Titre du devis *</text>
+  <rect x="32" y="544" width="310" height="38" fill="#f9fafb" rx="8" stroke="#d1d5db" stroke-width="1"/>
+  <text x="42" y="569" font-family="Arial" font-size="14" fill="#6b7280">Inspection électrique</text>
+  <text x="32" y="604" font-family="Arial" font-size="12" font-weight="bold" fill="#374151">Lignes du devis</text>
+  <rect x="250" y="596" width="92" height="28" fill="#e5e7eb" rx="8"/>
+  <text x="296" y="615" font-family="Arial" font-size="11" font-weight="bold" fill="#374151" text-anchor="middle">+ Ajouter</text>
+  <rect x="32" y="620" width="310" height="85" fill="#f9fafb" rx="8" stroke="#d1d5db" stroke-width="1"/>
+  <text x="42" y="642" font-family="Arial" font-size="11" fill="#6b7280">Visite technique des installations</text>
+  <text x="42" y="675" font-family="Arial" font-size="11" fill="#6b7280">Qté: 1</text>
+  <text x="120" y="675" font-family="Arial" font-size="11" fill="#6b7280">PU: 1 200.00 €</text>
+  <text x="280" y="675" font-family="Arial" font-size="13" font-weight="bold" fill="#1a56db">1 200.00 €</text>
+  <line x1="250" y1="720" x2="359" y2="720" stroke="#e5e7eb" stroke-width="2"/>
+  <text x="260" y="740" font-family="Arial" font-size="14" fill="#4b5563">Total</text>
+  <text x="320" y="740" font-family="Arial" font-size="20" font-weight="bold" fill="#1a56db">2 500 €</text>
+  <rect x="50" y="768" width="275" height="44" fill="#1a56db" rx="8"/>
+  <text x="187" y="796" font-family="Arial" font-size="15" font-weight="bold" fill="white" text-anchor="middle">Créer le devis</text>
+</svg>

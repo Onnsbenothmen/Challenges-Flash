@@ -11,9 +11,9 @@
    page d'accueil                               toutes les infos          automatiquement
                        • Entreprise
    👉 Voit les         • Contact               📋 Vérifie les
-   fonctionnalités     • Email                  lignes et le             📧 Envoie le
-   proposées           • Téléphone              montant total            PDF par email
-                       • Adresse                                         au client
+   fonctionnalités     • Email                  lignes et le             📧 Envoie la
+   proposées           • Téléphone              montant total            notification par email
+                        • Adresse
    🖱️ Clique sur
    "Nouveau devis"     • Titre du devis         🔄 Peut changer
                        • Description            le statut :

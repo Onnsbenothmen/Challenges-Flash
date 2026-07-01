@@ -5,13 +5,14 @@
 ---
 
 ### Slide 1 - Présentation (30s)
-- **Équipe** : [Noms]
+- **Équipe** : Ons ben othmen
 - **Sujet** : Axe Portail & Inspections
 - **Problème** : Gestion des demandes de devis et génération de rapports d'inspection
 
 ---
 
 ### Slide 2 - Analyse & Conception (1 min)
+- **Captures d'écran** : disponibles dans `screenshots/` (accueil, formulaire, liste, détail, PDF)
 - **Modèle de données** : 3 tables (Client, Quote, QuoteItem)
 - **Relations** : Client 1→N Quote, Quote 1→N QuoteItem
 - **Choix** : PostgreSQL (robustesse, intégrité référentielle, UUID, index)
@@ -49,7 +50,7 @@
 - **Tests unitaires automatisés** (Bonus +10 pts)
 - **Génération IA** de données de test
 - **Dashboard analytics** des devis
-- **Notifications email** automatiques
+- **Notifications email** automatiques (service intégré avec Nodemailer)
 - **CI/CD** Déploiement continu
 
 ---
@@ -63,3 +64,4 @@
 | PostgreSQL | MongoDB | Données relationnelles, intégrité, transactions, requêtes complexes |
 | PDFKit | jsPDF, Puppeteer | Léger, côté serveur, contrôle total du rendu |
 | CSS variables | Sass, Tailwind | Zéro dépendance, maintenable, natif |
+| Nodemailer | SendGrid, Mailgun | Standard Node.js, gratuit, simple à configurer |
