@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Portail & Inspections - Prototype Figma</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;background:#f3f4f6;color:#111827}
+:root{--primary:#1a56db;--primary-dark:#1648c0;--primary-light:#e8effd;--success:#059669;--warning:#d97706;--danger:#dc2626;--gray-50:#f9fafb;--gray-100:#f3f4f6;--gray-200:#e5e7eb;--gray-300:#d1d5db;--gray-400:#9ca3af;--gray-500:#6b7280;--gray-600:#4b5563;--gray-700:#374151;--gray-800:#1f2937;--gray-900:#111827;--white:#fff;--shadow-sm:0 1px 2px rgba(0,0,0,0.05);--shadow-md:0 4px 6px rgba(0,0,0,0.07);--radius-md:8px;--radius-lg:12px}
+.container{max-width:1200px;margin:0 auto;padding:1rem}
+h1{font-size:1.5rem;font-weight:800}
+h2{font-size:1.25rem;font-weight:700}
+.btn{display:inline-flex;align-items:center;justify-content:center;padding:0.625rem 1.25rem;font-size:0.875rem;font-weight:600;border:none;border-radius:var(--radius-md);cursor:pointer;text-decoration:none}
+.btn-primary{background:var(--primary);color:var(--white)}
+.btn-secondary{background:var(--gray-200);color:var(--gray-700)}
+.btn-sm{font-size:0.75rem;padding:0.375rem 0.75rem}
+.badge{display:inline-block;padding:0.25rem 0.625rem;font-size:0.75rem;font-weight:600;border-radius:9999px}
+.badge-draft{background:var(--gray-100);color:var(--gray-600)}
+.badge-sent{background:#dbeafe;color:var(--primary)}
+.badge-approved{background:#d1fae5;color:var(--success)}
+.card{background:var(--white);border-radius:var(--radius-lg);box-shadow:var(--shadow-md);padding:1.5rem;margin-bottom:1rem}
+.mockup-phone{max-width:375px;margin:0 auto;border:3px solid var(--gray-800);border-radius:40px;padding:1rem;background:var(--white);box-shadow:var(--shadow-lg)}
+.mockup-desktop{border:1px solid var(--gray-200);border-radius:var(--radius-lg);overflow:hidden;box-shadow:var(--shadow-lg);background:var(--white)}
+.mockup-bar{background:var(--primary);color:var(--white);padding:0.75rem 1rem;display:flex;justify-content:space-between;align-items:center}
+.mockup-content{padding:1.5rem;min-height:300px}
+.nav-bar{display:flex;justify-content:space-between;align-items:center;padding:0.75rem;background:var(--primary);color:var(--white);border-radius:var(--radius-sm);margin-bottom:1rem}
+.hero{background:linear-gradient(135deg,var(--primary),#2563eb);color:var(--white);padding:2rem 1rem;border-radius:var(--radius-lg);text-align:center;margin-bottom:1rem}
+.hero h1{font-size:1.5rem;margin-bottom:0.5rem}
+.hero p{font-size:0.85rem;opacity:0.9;margin-bottom:1rem}
+.screen-tab{padding:0.5rem 1rem;border-radius:var(--radius-md);border:1px solid var(--gray-300);background:var(--white);cursor:pointer;font-weight:600;font-size:0.8rem;margin:0.25rem}
+.screen-tab.active{background:var(--primary);color:var(--white);border-color:var(--primary)}
+.screen{display:none}
+.screen.active{display:block}
+.desc{font-size:0.75rem;color:var(--gray-500);background:var(--gray-50);padding:0.5rem;border-radius:var(--radius-sm);margin-top:0.5rem;text-align:center}
+</style>
+</head>
+<body>
+<div class="container">
+<h1>Portail & Inspections</h1>
+<p style="color:var(--gray-500);margin-bottom:1.5rem">Prototype interactif mobile & desktop</p>
+
+<div style="margin-bottom:2rem">
+  <h2 style="margin-bottom:0.5rem">Parcours utilisateur</h2>
+  <div style="display:flex;flex-wrap:wrap;gap:0.5rem;align-items:center;padding:1rem;background:var(--gray-100);border-radius:var(--radius-md)">
+    <span class="badge badge-sent">Accueil</span><span style="color:var(--gray-400)">→</span>
+    <span class="badge badge-sent">Nouveau devis</span><span style="color:var(--gray-400)">→</span>
+    <span class="badge badge-sent">Formulaire</span><span style="color:var(--gray-400)">→</span>
+    <span class="badge badge-sent">Soumission</span><span style="color:var(--gray-400)">→</span>
+    <span class="badge badge-sent">Détail</span><span style="color:var(--gray-400)">→</span>
+    <span class="badge badge-sent">PDF</span>
+  </div>
+</div>
+
+<div style="margin-bottom:1rem">
+  <button class="screen-tab active" onclick="showScreen('s-home',this)">1 Accueil</button>
+  <button class="screen-tab" onclick="showScreen('s-form',this)">2 Formulaire</button>
+  <button class="screen-tab" onclick="showScreen('s-list',this)">3 Liste</button>
+  <button class="screen-tab" onclick="showScreen('s-detail',this)">4 Détail</button>
+  <button class="screen-tab" onclick="showScreen('s-pdf',this)">5 PDF</button>
+</div>
+
+<div id="s-home" class="screen active">
+  <div class="mockup-phone">
+    <div class="nav-bar"><span>📋 Portail</span><span style="font-size:0.7rem">Nouveau</span></div>
+    <div class="hero"><h1>Portail & Inspections</h1><p>Gérez vos devis et générez des PDF</p><button class="btn btn-secondary" style="background:rgba(255,255,255,0.2);color:white;margin-bottom:0.5rem">Nouvelle demande</button><button class="btn btn-secondary" style="background:rgba(255,255,255,0.2);color:white">Voir mes devis</button></div>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:0.5rem">
+      <div style="background:var(--gray-50);padding:0.75rem;border-radius:var(--radius-md);text-align:center"><div style="font-size:1.5rem">📝</div><strong style="font-size:0.75rem">Formulaire</strong></div>
+      <div style="background:var(--gray-50);padding:0.75rem;border-radius:var(--radius-md);text-align:center"><div style="font-size:1.5rem">📄</div><strong style="font-size:0.75rem">PDF</strong></div>
+      <div style="background:var(--gray-50);padding:0.75rem;border-radius:var(--radius-md);text-align:center"><div style="font-size:1.5rem">📱</div><strong style="font-size:0.75rem">Mobile First</strong></div>
+      <div style="background:var(--gray-50);padding:0.75rem;border-radius:var(--radius-md);text-align:center"><div style="font-size:1.5rem">🔒</div><strong style="font-size:0.75rem">Sécurisé</strong></div>
+    </div>
+    <div class="desc">Écran 1 : Accueil</div>
+  </div>
+  <div class="mockup-desktop" style="margin-top:1rem">
+    <div class="mockup-bar"><span>📋 Portail & Inspections</span><div style="display:flex;gap:1rem"><span style="color:rgba(255,255,255,0.8);font-size:0.8rem">Accueil</span><span style="color:rgba(255,255,255,0.8);font-size:0.8rem">Nouveau</span><span style="color:rgba(255,255,255,0.8);font-size:0.8rem">Mes devis</span></div></div>
+    <div class="mockup-content">
+      <div class="hero"><h1 style="font-size:2rem">Portail & Inspections</h1><p style="font-size:1rem">Gérez vos demandes de devis</p><button class="btn btn-primary">Nouvelle demande</button></div>
+    </div>
+  </div>
+</div>
+
+<div id="s-form" class="screen">
+  <div class="mockup-phone">
+    <div class="nav-bar"><span>📋 Nouveau devis</span></div>
+    <div style="margin-bottom:0.5rem"><label style="font-size:0.75rem;font-weight:600">Entreprise *</label><input value="Tech Industries" style="width:100%;padding:0.5rem;border:1px solid var(--gray-300);border-radius:var(--radius-md);margin-top:0.25rem"></div>
+    <div style="margin-bottom:0.5rem"><label style="font-size:0.75rem;font-weight:600">Contact *</label><input value="Jean Dupont" style="width:100%;padding:0.5rem;border:1px solid var(--gray-300);border-radius:var(--radius-md);margin-top:0.25rem"></div>
+    <div style="margin-bottom:0.5rem"><label style="font-size:0.75rem;font-weight:600">Email *</label><input value="jean@tech.fr" style="width:100%;padding:0.5rem;border:1px solid var(--gray-300);border-radius:var(--radius-md);margin-top:0.25rem"></div>
+    <div style="display:flex;justify-content:space-between;align-items:center;margin:0.75rem 0"><strong style="font-size:0.8rem">Lignes</strong><button class="btn btn-secondary btn-sm">+ Ajouter</button></div>
+    <div style="background:var(--gray-50);padding:0.5rem;border-radius:var(--radius-md)">
+      <input value="Visite technique" style="width:100%;padding:0.4rem;border:1px solid var(--gray-300);border-radius:var(--radius-md);margin-bottom:0.25rem;font-size:0.75rem">
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:0.5rem"><input value="1" style="padding:0.4rem;border:1px solid var(--gray-300);border-radius:var(--radius-md);font-size:0.75rem"><input value="1200.00" style="padding:0.4rem;border:1px solid var(--gray-300);border-radius:var(--radius-md);font-size:0.75rem"></div>
+      <div style="text-align:right;font-weight:700;color:var(--primary);margin-top:0.25rem">1 200.00 €</div>
+    </div>
+    <div style="display:flex;justify-content:flex-end;gap:0.5rem;padding:0.5rem 0;border-top:2px solid var(--gray-200);margin-top:0.5rem"><span>Total</span><span style="font-size:1.25rem;font-weight:800;color:var(--primary)">2 500.00 €</span></div>
+    <button class="btn btn-primary btn-sm" style="width:100%;margin-top:0.5rem">Créer le devis</button>
+    <div class="desc">Écran 2 : Formulaire dynamique</div>
+  </div>
+</div>
+
+<div id="s-list" class="screen">
+  <div class="mockup-phone">
+    <div class="nav-bar"><span>📋 Mes devis</span><span style="font-size:0.7rem">+ Nouveau</span></div>
+    <select style="width:100%;padding:0.4rem;border:1px solid var(--gray-300);border-radius:var(--radius-md);margin-bottom:0.75rem;font-size:0.75rem"><option>Tous</option></select>
+    <div style="background:var(--white);padding:0.75rem;border-radius:var(--radius-md);box-shadow:var(--shadow-sm);margin-bottom:0.5rem;border:1px solid var(--gray-200)"><div style="display:flex;justify-content:space-between"><div><strong style="font-size:0.85rem">Inspection électrique</strong><p style="font-size:0.7rem;color:var(--gray-500)">Tech Industries</p></div><div style="text-align:right"><span class="badge badge-draft">Brouillon</span><p style="font-size:0.85rem;font-weight:700;color:var(--primary);margin-top:0.25rem">2 500 €</p></div></div></div>
+    <div style="background:var(--white);padding:0.75rem;border-radius:var(--radius-md);box-shadow:var(--shadow-sm);margin-bottom:0.5rem;border:1px solid var(--gray-200)"><div style="display:flex;justify-content:space-between"><div><strong style="font-size:0.85rem">Diagnostic structure</strong><p style="font-size:0.7rem;color:var(--gray-500)">Bâtiment Moderne</p></div><div style="text-align:right"><span class="badge badge-sent">Envoyé</span><p style="font-size:0.85rem;font-weight:700;color:var(--primary);margin-top:0.25rem">5 800 €</p></div></div></div>
+    <div style="background:var(--white);padding:0.75rem;border-radius:var(--radius-md);box-shadow:var(--shadow-sm);border:1px solid var(--gray-200)"><div style="display:flex;justify-content:space-between"><div><strong style="font-size:0.85rem">Audit conformité</strong><p style="font-size:0.7rem;color:var(--gray-500)">Services Pro</p></div><div style="text-align:right"><span class="badge badge-approved">Approuvé</span><p style="font-size:0.85rem;font-weight:700;color:var(--primary);margin-top:0.25rem">3 200 €</p></div></div></div>
+    <div class="desc">Écran 3 : Liste avec filtres</div>
+  </div>
+</div>
+
+<div id="s-detail" class="screen">
+  <div class="mockup-phone">
+    <div style="display:flex;justify-content:space-between;margin-bottom:0.75rem"><span style="font-size:0.75rem;color:var(--gray-500)">← Retour</span><button class="btn btn-primary btn-sm">PDF</button></div>
+    <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:0.75rem"><div><h2 style="font-size:1.1rem">Inspection électrique</h2><p style="font-size:0.7rem;color:var(--gray-400)">N° DEV-0001</p></div><span class="badge badge-draft">Brouillon</span></div>
+    <p style="font-size:0.75rem;margin-bottom:0.75rem"><strong>Tech Industries SAS</strong><br><span style="color:var(--gray-500)">Jean Dupont • jean@tech.fr</span></p>
+    <table style="width:100%;font-size:0.75rem;border-collapse:collapse"><tr style="background:var(--gray-50)"><th style="padding:0.4rem;text-align:left">Description</th><th style="padding:0.4rem;text-align:right">Total</th></tr>
+    <tr><td style="padding:0.4rem;border-bottom:1px solid var(--gray-100)">Visite technique (×1)</td><td style="padding:0.4rem;border-bottom:1px solid var(--gray-100);text-align:right">1 200 €</td></tr>
+    <tr><td style="padding:0.4rem;border-bottom:1px solid var(--gray-100)">Rapport inspection (×1)</td><td style="padding:0.4rem;border-bottom:1px solid var(--gray-100);text-align:right">800 €</td></tr>
+    <tr><td style="padding:0.4rem">Tests conformité (×5)</td><td style="padding:0.4rem;text-align:right">500 €</td></tr></table>
+    <div style="display:flex;justify-content:flex-end;gap:0.5rem;padding:0.5rem 0;border-top:2px solid var(--gray-200);margin-top:0.5rem"><span>Total</span><span style="font-size:1.25rem;font-weight:800;color:var(--primary)">2 500.00 €</span></div>
+    <div class="desc">Écran 4 : Détail + Téléchargement PDF</div>
+  </div>
+</div>
+
+<div id="s-pdf" class="screen">
+  <div style="text-align:center;padding:1rem">
+    <div style="font-size:3rem">📄</div>
+    <h2 style="margin:0.5rem 0">Génération PDF</h2>
+    <p style="color:var(--gray-500);font-size:0.85rem;margin-bottom:1rem">PDF généré avec PDFKit</p>
+    <div style="background:var(--white);border:2px dashed var(--gray-300);border-radius:var(--radius-lg);padding:1.5rem;max-width:500px;margin:0 auto;text-align:left;font-size:0.7rem">
+      <div style="background:#1a56db;color:white;padding:0.75rem;text-align:center;border-radius:4px 4px 0 0"><strong>DEVIS</strong></div>
+      <div style="padding:0.75rem;border:1px solid var(--gray-200)"><p><strong>N° DEV-0001</strong> | 30/06/2026</p><p style="margin-top:0.5rem">Client : Tech Industries SAS | Jean Dupont</p></div>
+      <div style="padding:0.75rem;border:1px solid var(--gray-200);border-top:none"><div style="display:flex;justify-content:space-between;background:var(--gray-100);padding:0.25rem;font-weight:600"><span>Description</span><span>Total</span></div>
+      <div style="display:flex;justify-content:space-between;padding:0.25rem"><span>Visite technique</span><span>1 200 €</span></div>
+      <div style="display:flex;justify-content:space-between;padding:0.25rem"><span>Rapport inspection</span><span>800 €</span></div>
+      <div style="display:flex;justify-content:space-between;padding:0.25rem"><span>Tests conformité</span><span>500 €</span></div></div>
+      <div style="background:#1a56db;color:white;padding:0.5rem;text-align:right;font-weight:700">TOTAL: 2 500.00 €</div>
+      <div style="text-align:center;color:var(--gray-400);padding:0.5rem;font-size:0.6rem">Portail & Inspections - RIF</div>
+    </div>
+    <div class="desc" style="margin-top:1rem">Écran 5 : Aperçu PDF</div>
+  </div>
+</div>
+
+</div>
+<script>
+function showScreen(id,btn){
+  document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active'))
+  document.getElementById(id).classList.add('active')
+  document.querySelectorAll('.screen-tab').forEach(t=>t.classList.remove('active'))
+  btn.classList.add('active')
+}
+</script>
+</body>
+</html>
