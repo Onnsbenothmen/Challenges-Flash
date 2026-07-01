@@ -1,52 +1,40 @@
 class QuoteItem {
-  constructor(pool) {
-    this.pool = pool;
+  constructor(db) {
+    this.db = db;
   }
 
-  async create(quoteId, data) {
-    const { rows } = await this.pool.query(
+  create(quoteId, data) {
+    const stmt = this.db.prepare(
       `INSERT INTO quote_items (quote_id, description, quantity, unit_price)
-       VALUES ($1, $2, $3, $4)
-       RETURNING *`,
-      [quoteId, data.description, data.quantity, data.unit_price]
+       VALUES (?, ?, ?, ?)`
     );
-    return rows[0];
+    const result = stmt.run(quoteId, data.description, data.quantity, data.unit_price);
+    return this.db.prepare('SELECT * FROM quote_items WHERE id = ?').get(result.lastInsertRowid);
   }
 
-  async findByQuoteId(quoteId) {
-    const { rows } = await this.pool.query(
-      'SELECT * FROM quote_items WHERE quote_id = $1 ORDER BY id',
-      [quoteId]
-    );
-    return rows;
+  findByQuoteId(quoteId) {
+    return this.db.prepare('SELECT * FROM quote_items WHERE quote_id = ? ORDER BY id').all(quoteId);
   }
 
-  async bulkCreate(quoteId, items) {
-    if (items.length === 0) return [];
-
-    const values = items.map((_, i) =>
-      `($1, $${i * 3 + 2}, $${i * 3 + 3}, $${i * 3 + 4})`
-    ).join(', ');
-
-    const flatValues = [quoteId];
-    for (const item of items) {
-      flatValues.push(item.description, item.quantity, item.unit_price);
-    }
-
-    const { rows } = await this.pool.query(
+  bulkCreate(quoteId, items) {
+    const stmt = this.db.prepare(
       `INSERT INTO quote_items (quote_id, description, quantity, unit_price)
-       VALUES ${values} RETURNING *`,
-      flatValues
+       VALUES (?, ?, ?, ?)`
     );
-    return rows;
+
+    const insertMany = this.db.transaction((items) => {
+      for (const item of items) {
+        stmt.run(quoteId, item.description, item.quantity, item.unit_price);
+      }
+    });
+
+    insertMany(items);
+    return this.findByQuoteId(quoteId);
   }
 
-  async deleteByQuoteId(quoteId) {
-    const { rowCount } = await this.pool.query(
-      'DELETE FROM quote_items WHERE quote_id = $1',
-      [quoteId]
-    );
-    return rowCount;
+  deleteByQuoteId(quoteId) {
+    const result = this.db.prepare('DELETE FROM quote_items WHERE quote_id = ?').run(quoteId);
+    return result.changes;
   }
 }
 

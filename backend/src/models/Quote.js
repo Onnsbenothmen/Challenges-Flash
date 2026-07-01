@@ -1,97 +1,86 @@
 class Quote {
-  constructor(pool) {
-    this.pool = pool;
+  constructor(db) {
+    this.db = db;
   }
 
-  async create(clientId, data) {
-    const { rows } = await this.pool.query(
+  create(clientId, data) {
+    const stmt = this.db.prepare(
       `INSERT INTO quotes (client_id, title, description, valid_until, notes)
-       VALUES ($1, $2, $3, $4, $5)
-       RETURNING *`,
-      [clientId, data.title, data.description || null, data.valid_until || null, data.notes || null]
+       VALUES (?, ?, ?, ?, ?)`
     );
-    return rows[0];
+    const result = stmt.run(clientId, data.title, data.description || null, data.valid_until || null, data.notes || null);
+    return this.findById(result.lastInsertRowid);
   }
 
-  async findById(id) {
-    const { rows } = await this.pool.query(
+  findById(id) {
+    const quote = this.db.prepare(
       `SELECT q.*, c.company_name, c.contact_name, c.email, c.phone, c.address
        FROM quotes q
        JOIN clients c ON q.client_id = c.id
-       WHERE q.id = $1`,
-      [id]
-    );
-    if (!rows[0]) return null;
+       WHERE q.id = ?`
+    ).get(id);
 
-    const { rows: items } = await this.pool.query(
-      'SELECT * FROM quote_items WHERE quote_id = $1 ORDER BY id',
-      [id]
-    );
+    if (!quote) return null;
 
-    return { ...rows[0], items };
+    quote.items = this.db.prepare('SELECT * FROM quote_items WHERE quote_id = ? ORDER BY id').all(id);
+    return quote;
   }
 
-  async findAll(filters = {}) {
-    let query = `SELECT q.*, c.company_name, c.contact_name
-                 FROM quotes q
-                 JOIN clients c ON q.client_id = c.id`;
+  findAll(filters = {}) {
+    let sql = `SELECT q.*, c.company_name, c.contact_name
+               FROM quotes q
+               JOIN clients c ON q.client_id = c.id`;
     const params = [];
     const conditions = [];
 
     if (filters.status) {
-      conditions.push(`q.status = $${params.length + 1}`);
+      conditions.push('q.status = ?');
       params.push(filters.status);
     }
 
     if (filters.client_id) {
-      conditions.push(`q.client_id = $${params.length + 1}`);
+      conditions.push('q.client_id = ?');
       params.push(filters.client_id);
     }
 
     if (conditions.length > 0) {
-      query += ' WHERE ' + conditions.join(' AND ');
+      sql += ' WHERE ' + conditions.join(' AND ');
     }
 
-    query += ' ORDER BY q.created_at DESC';
+    sql += ' ORDER BY q.created_at DESC';
 
-    const { rows } = await this.pool.query(query, params);
-    return rows;
+    return this.db.prepare(sql).all(...params);
   }
 
-  async update(id, data) {
+  update(id, data) {
     const fields = [];
     const values = [];
-    let idx = 1;
 
     for (const [key, value] of Object.entries(data)) {
       if (value !== undefined && key !== 'items') {
-        fields.push(`${key} = $${idx++}`);
+        fields.push(`${key} = ?`);
         values.push(value);
       }
     }
 
     if (fields.length === 0) return this.findById(id);
 
-    fields.push('updated_at = CURRENT_TIMESTAMP');
+    fields.push("updated_at = datetime('now')");
     values.push(id);
 
-    const { rows } = await this.pool.query(
-      `UPDATE quotes SET ${fields.join(', ')} WHERE id = $${idx} RETURNING *`,
-      values
-    );
-    return rows[0] || null;
+    this.db.prepare(`UPDATE quotes SET ${fields.join(', ')} WHERE id = ?`).run(...values);
+    return this.findById(id);
   }
 
-  async updateTotalAmount(id) {
-    const { rows } = await this.pool.query(
+  updateTotalAmount(id) {
+    this.db.prepare(
       `UPDATE quotes SET total_amount = (
          SELECT COALESCE(SUM(total_price), 0)
-         FROM quote_items WHERE quote_id = $1
-       ), updated_at = CURRENT_TIMESTAMP
-       WHERE id = $1 RETURNING *`,
-      [id]
-    );
-    return rows[0];
+         FROM quote_items WHERE quote_id = ?
+       ), updated_at = datetime('now')
+       WHERE id = ?`
+    ).run(id, id);
+    return this.findById(id);
   }
 }
 

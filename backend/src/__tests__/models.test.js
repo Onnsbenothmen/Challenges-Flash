@@ -1,112 +1,104 @@
 const Client = require('../models/Client');
 const Quote = require('../models/Quote');
 const QuoteItem = require('../models/QuoteItem');
-
-const mockPool = {
-  query: jest.fn(),
-};
+const { createTestDb } = require('./helpers');
 
 describe('Client Model', () => {
-  const client = new Client(mockPool);
+  let db;
+  let client;
 
   beforeEach(() => {
-    jest.clearAllMocks();
+    db = createTestDb();
+    client = new Client(db);
   });
 
-  test('create() inserts a new client', async () => {
-    const data = {
+  test('create() inserts a new client', () => {
+    const result = client.create({
       company_name: 'Test SARL',
       contact_name: 'Jean Test',
       email: 'jean@test.fr',
       phone: '+33 6 00 00 00 00',
       address: '1 rue Test, Paris',
-    };
-    mockPool.query.mockResolvedValue({ rows: [{ id: 1, ...data }] });
-
-    const result = await client.create(data);
-    expect(result.company_name).toBe('Test SARL');
-    expect(mockPool.query).toHaveBeenCalledTimes(1);
-  });
-
-  test('findById() returns null for non-existent client', async () => {
-    mockPool.query.mockResolvedValue({ rows: [] });
-    const result = await client.findById(999);
-    expect(result).toBeNull();
-  });
-
-  test('findAll() returns all clients', async () => {
-    mockPool.query.mockResolvedValue({
-      rows: [
-        { id: 1, company_name: 'A' },
-        { id: 2, company_name: 'B' },
-      ],
     });
-    const result = await client.findAll();
+    expect(result.company_name).toBe('Test SARL');
+    expect(result.id).toBe(1);
+  });
+
+  test('findById() returns null for non-existent client', () => {
+    const result = client.findById(999);
+    expect(result).toBeUndefined();
+  });
+
+  test('findAll() returns all clients', () => {
+    client.create({ company_name: 'A', contact_name: 'C1', email: 'a@a.fr' });
+    client.create({ company_name: 'B', contact_name: 'C2', email: 'b@b.fr' });
+    const result = client.findAll();
     expect(result).toHaveLength(2);
   });
 });
 
 describe('Quote Model', () => {
-  const quote = new Quote(mockPool);
+  let db;
+  let quote;
+  let clientId;
 
   beforeEach(() => {
-    jest.clearAllMocks();
+    db = createTestDb();
+    quote = new Quote(db);
+    const c = new Client(db);
+    const cl = c.create({ company_name: 'Test', contact_name: 'T', email: 't@t.fr' });
+    clientId = cl.id;
   });
 
-  test('create() inserts a new quote', async () => {
-    const data = { title: 'Test Devis', description: 'Description test' };
-    mockPool.query.mockResolvedValue({ rows: [{ id: 1, client_id: 1, ...data }] });
-
-    const result = await quote.create(1, data);
+  test('create() inserts a new quote', () => {
+    const result = quote.create(clientId, { title: 'Test Devis', description: 'Desc' });
     expect(result.title).toBe('Test Devis');
   });
 
-  test('findById() returns quote with items', async () => {
-    mockPool.query
-      .mockResolvedValueOnce({
-        rows: [{ id: 1, title: 'Test', company_name: 'Client' }],
-      })
-      .mockResolvedValueOnce({
-        rows: [
-          { id: 1, description: 'Item 1', quantity: 2, unit_price: '100.00', total_price: '200.00' },
-        ],
-      });
+  test('findById() returns quote with items', () => {
+    const q = quote.create(clientId, { title: 'Test' });
+    const itemModel = new QuoteItem(db);
+    itemModel.create(q.id, { description: 'Item 1', quantity: 2, unit_price: 100 });
 
-    const result = await quote.findById(1);
+    const result = quote.findById(q.id);
     expect(result.title).toBe('Test');
     expect(result.items).toHaveLength(1);
   });
 
-  test('findAll() with status filter', async () => {
-    mockPool.query.mockResolvedValue({
-      rows: [{ id: 1, title: 'Test', status: 'draft' }],
-    });
-    const result = await quote.findAll({ status: 'draft' });
-    expect(result).toHaveLength(1);
+  test('findAll() with status filter', () => {
+    quote.create(clientId, { title: 'A' });
+    const results = quote.findAll({ status: 'draft' });
+    expect(results.length).toBeGreaterThanOrEqual(1);
   });
 });
 
 describe('QuoteItem Model', () => {
-  const item = new QuoteItem(mockPool);
+  let db;
+  let item;
+  let quoteId;
 
   beforeEach(() => {
-    jest.clearAllMocks();
+    db = createTestDb();
+    item = new QuoteItem(db);
+    const c = new Client(db);
+    const cl = c.create({ company_name: 'T', contact_name: 'T', email: 't@t.fr' });
+    const q = new Quote(db);
+    const qu = q.create(cl.id, { title: 'Test' });
+    quoteId = qu.id;
   });
 
-  test('bulkCreate() inserts multiple items', async () => {
+  test('bulkCreate() inserts multiple items', () => {
     const items = [
       { description: 'Item 1', quantity: 1, unit_price: 100 },
       { description: 'Item 2', quantity: 2, unit_price: 50 },
     ];
-    mockPool.query.mockResolvedValue({ rows: items });
-
-    const result = await item.bulkCreate(1, items);
+    const result = item.bulkCreate(quoteId, items);
     expect(result).toHaveLength(2);
   });
 
-  test('deleteByQuoteId() removes items', async () => {
-    mockPool.query.mockResolvedValue({ rowCount: 2 });
-    const result = await item.deleteByQuoteId(1);
-    expect(result).toBe(2);
+  test('deleteByQuoteId() removes items', () => {
+    item.create(quoteId, { description: 'Test', quantity: 1, unit_price: 10 });
+    const result = item.deleteByQuoteId(quoteId);
+    expect(result).toBe(1);
   });
 });

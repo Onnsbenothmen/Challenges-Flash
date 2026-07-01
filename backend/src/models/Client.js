@@ -1,50 +1,43 @@
 class Client {
-  constructor(pool) {
-    this.pool = pool;
+  constructor(db) {
+    this.db = db;
   }
 
-  async create(data) {
-    const { rows } = await this.pool.query(
+  create(data) {
+    const stmt = this.db.prepare(
       `INSERT INTO clients (company_name, contact_name, email, phone, address)
-       VALUES ($1, $2, $3, $4, $5)
-       RETURNING *`,
-      [data.company_name, data.contact_name, data.email, data.phone || null, data.address || null]
+       VALUES (?, ?, ?, ?, ?)`
     );
-    return rows[0];
+    const result = stmt.run(data.company_name, data.contact_name, data.email, data.phone || null, data.address || null);
+    return this.findById(result.lastInsertRowid);
   }
 
-  async findById(id) {
-    const { rows } = await this.pool.query('SELECT * FROM clients WHERE id = $1', [id]);
-    return rows[0] || null;
+  findById(id) {
+    return this.db.prepare('SELECT * FROM clients WHERE id = ?').get(id) || null;
   }
 
-  async findAll() {
-    const { rows } = await this.pool.query('SELECT * FROM clients ORDER BY created_at DESC');
-    return rows;
+  findAll() {
+    return this.db.prepare('SELECT * FROM clients ORDER BY created_at DESC').all();
   }
 
-  async update(id, data) {
+  update(id, data) {
     const fields = [];
     const values = [];
-    let idx = 1;
 
     for (const [key, value] of Object.entries(data)) {
       if (value !== undefined) {
-        fields.push(`${key} = $${idx++}`);
+        fields.push(`${key} = ?`);
         values.push(value);
       }
     }
 
     if (fields.length === 0) return this.findById(id);
 
-    fields.push(`updated_at = CURRENT_TIMESTAMP`);
+    fields.push('updated_at = datetime(\'now\')');
     values.push(id);
 
-    const { rows } = await this.pool.query(
-      `UPDATE clients SET ${fields.join(', ')} WHERE id = $${idx} RETURNING *`,
-      values
-    );
-    return rows[0] || null;
+    this.db.prepare(`UPDATE clients SET ${fields.join(', ')} WHERE id = ?`).run(...values);
+    return this.findById(id);
   }
 }
 

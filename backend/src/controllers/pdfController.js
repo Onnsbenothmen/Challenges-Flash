@@ -2,12 +2,12 @@ const PDFDocument = require('pdfkit');
 const Quote = require('../models/Quote');
 const { AppError } = require('../middleware/errorHandler');
 
-exports.generateQuotePDF = async (req, res, next) => {
+exports.generateQuotePDF = (req, res, next) => {
   try {
-    const pool = req.app.locals.pool;
-    const quoteModel = new Quote(pool);
+    const db = req.app.locals.db;
+    const quoteModel = new Quote(db);
     const quoteId = parseInt(req.params.id);
-    const quote = await quoteModel.findById(quoteId);
+    const quote = quoteModel.findById(quoteId);
 
     if (!quote) {
       throw new AppError('Devis non trouvé', 404);
